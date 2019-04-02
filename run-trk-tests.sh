@@ -24,7 +24,7 @@ then
 fi
 
 # check and create relevant directories
-if ! [ -f $coatDir ] 
+if ! [ -d $coatDir ] 
 then
     echo  "Creating coatjava tar file directory " $coatDir
     mkdir $coatDir
