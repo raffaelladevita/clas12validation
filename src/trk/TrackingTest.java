@@ -844,19 +844,19 @@ public class TrackingTest {
         H2F hi_vz_vs_theta_neg_cvt = new H2F("hi_vz_vs_theta_neg","hi_vz_vs_theta_neg",100, 5.,120.,100,-15.,15);
         hi_vz_vs_theta_neg_cvt.setTitleX("#theta (deg)");
         hi_vz_vs_theta_neg_cvt.setTitleY("Vz (cm)");
-        H2F hi_vz_vs_phi_pos = new H2F("hi_vz_vs_phi_pos","hi_vz_vs_phi_pos",200,-15.,15.,200,-180,180);
-        hi_vz_vs_phi_pos.setTitleX("Vz (cm)");
-        hi_vz_vs_phi_pos.setTitleY("#phi (deg)");
-        H2F hi_vz_vs_phi_neg = new H2F("hi_vz_vs_phi_neg","hi_vz_vs_phi_neg",200,-15.,15.,200,-180,180);
-        hi_vz_vs_phi_neg.setTitleX("Vz (cm)");
-        hi_vz_vs_phi_neg.setTitleY("#phi (deg)");
+        H2F hi_vz_vs_phi_pos_cvt = new H2F("hi_vz_vs_phi_pos","hi_vz_vs_phi_pos",200,-15.,15.,200,-180,180);
+        hi_vz_vs_phi_pos_cvt.setTitleX("Vz (cm)");
+        hi_vz_vs_phi_pos_cvt.setTitleY("#phi (deg)");
+        H2F hi_vz_vs_phi_neg_cvt = new H2F("hi_vz_vs_phi_neg","hi_vz_vs_phi_neg",200,-15.,15.,200,-180,180);
+        hi_vz_vs_phi_neg_cvt.setTitleX("Vz (cm)");
+        hi_vz_vs_phi_neg_cvt.setTitleY("#phi (deg)");
         DataGroup cvtVertex = new DataGroup(3,2);
-        cvtVertex.addDataSet(hi_vz_vs_theta_pos, 0);
-        cvtVertex.addDataSet(hi_vxy_pos, 1);
-        cvtVertex.addDataSet(hi_vz_vs_phi_pos, 2);
-        cvtVertex.addDataSet(hi_vz_vs_theta_neg, 3);
-        cvtVertex.addDataSet(hi_vxy_neg, 4);
-        cvtVertex.addDataSet(hi_vz_vs_phi_neg, 5);
+        cvtVertex.addDataSet(hi_vz_vs_theta_pos_cvt, 0);
+        cvtVertex.addDataSet(hi_vxy_pos_cvt,         1);
+        cvtVertex.addDataSet(hi_vz_vs_phi_pos_cvt,   2);
+        cvtVertex.addDataSet(hi_vz_vs_theta_neg_cvt, 3);
+        cvtVertex.addDataSet(hi_vxy_neg_cvt,         4);
+        cvtVertex.addDataSet(hi_vz_vs_phi_neg_cvt,   5);
         dataGroups.add(cvtVertex, 8);
 
         // negative and positive tracks by sector
@@ -1056,7 +1056,7 @@ public class TrackingTest {
         canvasTabbed.getCanvas("TBT Vertex").getPad(2).getAxisZ().setLog(true);
         canvasTabbed.getCanvas("TBT Vertex").draw(dataGroups.getItem(4).getH2F("hi_vxy_pos"));
         canvasTabbed.getCanvas("TBT Vertex").cd(3);
-        canvasTabbed.getCanvas("TBT Vertex").draw(this.getDataGroup().getItem(4).getH2F("hi_vz_vs_phi_pos"));
+        canvasTabbed.getCanvas("TBT Vertex").draw(dataGroups.getItem(4).getH2F("hi_vz_vs_phi_pos"));
         canvasTabbed.getCanvas("TBT Vertex").cd(4);
         canvasTabbed.getCanvas("TBT Vertex").draw(dataGroups.getItem(1).getH1F("hi_vz_neg"));
         canvasTabbed.getCanvas("TBT Vertex").draw(dataGroups.getItem(1).getH1F("hi_vz_neg_cut"),"same");
@@ -1067,7 +1067,7 @@ public class TrackingTest {
         canvasTabbed.getCanvas("TBT Vertex").getPad(6).getAxisZ().setLog(true);
         canvasTabbed.getCanvas("TBT Vertex").draw(dataGroups.getItem(4).getH2F("hi_vxy_neg"));
         canvasTabbed.getCanvas("TBT Vertex").cd(7);
-        canvasTabbed.getCanvas("TBT Vertex").draw(this.getDataGroup().getItem(4).getH2F("hi_vz_vs_phi_neg"));
+        canvasTabbed.getCanvas("TBT Vertex").draw(dataGroups.getItem(4).getH2F("hi_vz_vs_phi_neg"));
 
         canvasTabbed.getCanvas("CVT Negative Tracks").cd(0);
         canvasTabbed.getCanvas("CVT Negative Tracks").draw(dataGroups.getItem(5).getH1F("hi_p_neg"));
@@ -1142,7 +1142,7 @@ public class TrackingTest {
         canvasTabbed.getCanvas("CVT Vertex").getPad(2).getAxisZ().setLog(true);
         canvasTabbed.getCanvas("CVT Vertex").draw(dataGroups.getItem(8).getH2F("hi_vxy_pos"));
         canvasTabbed.getCanvas("CVT Vertex").cd(3);
-        canvasTabbed.getCanvas("CVT Vertex").draw(this.getDataGroup().getItem(8).getH2F("hi_vz_vs_phi_pos"));
+        canvasTabbed.getCanvas("CVT Vertex").draw(dataGroups.getItem(8).getH2F("hi_vz_vs_phi_pos"));
         canvasTabbed.getCanvas("CVT Vertex").cd(4);
         canvasTabbed.getCanvas("CVT Vertex").draw(dataGroups.getItem(5).getH1F("hi_vz_neg"));
         canvasTabbed.getCanvas("CVT Vertex").draw(dataGroups.getItem(5).getF1D("f1_vz_neg"),"same");
@@ -1152,7 +1152,7 @@ public class TrackingTest {
         canvasTabbed.getCanvas("CVT Vertex").getPad(6).getAxisZ().setLog(true);
         canvasTabbed.getCanvas("CVT Vertex").draw(dataGroups.getItem(8).getH2F("hi_vxy_neg"));
         canvasTabbed.getCanvas("CVT Vertex").cd(7);
-        canvasTabbed.getCanvas("CVT Vertex").draw(this.getDataGroup().getItem(8).getH2F("hi_vz_vs_phi_neg"));
+        canvasTabbed.getCanvas("CVT Vertex").draw(dataGroups.getItem(8).getH2F("hi_vz_vs_phi_neg"));
 
         for(int sector=1; sector<=6; sector++) {
             canvasTabbed.getCanvas("TBT Positive Tracks by Sector").cd(sector-1);
