@@ -141,6 +141,8 @@ case $inFileStub in
         ;;
     clas_004150.0)
         ;;
+    clas_006223.1)
+        ;;
     *)
       echo Invalid input evio file:  $inFileStub
       exit 1
@@ -158,7 +160,9 @@ export COAT
 if ! [ $useClara -eq 0 ]
 then
     CLARA_HOME=$PWD/clara-$branch
+    CLARA_USER_DATA=$PWD/clara-$branch
     export CLARA_HOME
+    export CLARA_USER_DATA
 fi
 
 # if build flag is set clone git repo for the chosen branch and compile
@@ -168,7 +172,7 @@ then
     buildcommand="rm -rf clas12-offline-software ; \
                   git clone -b "$branch" https://github.com/JeffersonLab/clas12-offline-software ; \
                   cd clas12-offline-software ; \
-                  ./build-coatjava.sh --nospotbugs ; \
+                  ./build-coatjava.sh --unittests; \
                   tar -zcvf coatjava.tar.gz coatjava ; \
                   cd .."
     echo "cd $buildir" >  build.sh              
@@ -230,7 +234,7 @@ then
             wget --no-check-certificate https://claraweb.jlab.org/clara/_downloads/install-claracre-clas.sh
             chmod +x install-claracre-clas.sh
             cp -p $coatDir/coatjava-$branch.tar.gz .
-            echo Y | ./install-claracre-clas.sh -l $branch -f 4.3.5
+            ./install-claracre-clas.sh -l $branch -f 4.3.9 -g 2.0
             if [ $? != 0 ] ; then echo "clara installation error" ; exit 1 ; fi
             rm install-claracre-clas.sh
         fi
