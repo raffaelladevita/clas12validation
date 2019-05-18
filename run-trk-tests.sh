@@ -240,7 +240,7 @@ then
             wget --no-check-certificate https://claraweb.jlab.org/clara/_downloads/install-claracre-clas.sh
             chmod +x install-claracre-clas.sh
             cp -p $coatDir/coatjava-$branch.tar.gz .
-            ./install-claracre-clas.sh -l $branch -f 4.3.9 -g 2.0
+            ./install-claracre-clas.sh -l $branch -f 4.4 -g 2.1
             if [ $? != 0 ] ; then echo "clara installation error" ; exit 1 ; fi
             rm install-claracre-clas.sh
         fi
