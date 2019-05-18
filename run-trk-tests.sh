@@ -5,7 +5,7 @@ outFileDir=./outfiles
 coatDir=./coat
 
 # usage options
-usage='run-trk-tests.sh [--build] [-bhost hostname] [-bdir directory] [--wget] [-branch branch/release name] [--clean] [-file input-file-name] [-run local/farm/no] [-scratch directory] [--notest]'
+usage='run-trk-tests.sh [--build] [-bhost hostname] [-bdir directory] [--wget] [-branch branch/release name] [--clean] [-file input-file-name] [-yaml name.yaml] [-run local/farm/no] [-scratch directory] [--notest]'
 if [ $# -eq "0" ]
 then
     echo $usage
@@ -13,12 +13,13 @@ then
     echo " -bhost:        build host (jlabl5 for CUE building)"
     echo " -bdir:         build directory (/scratch/... for jlabl5)"
     echo "--build:        build branch selected with -branch option"
-    echo " -branch name:  select branch to be built or release to be downloaded"
+    echo " -branch:       select branch to be built or release to be downloaded"
     echo "--clean:        remove clara installation and configuration files"
-    echo " -file name:    specify input file name (default sidis)"
+    echo " -file:         specify input file name (default sidis)"
+    echo " -yaml:         specify yaml file name (default services.yaml)"
     echo " -scratch:      specify local scratch directory to store input/ouput files during processing"
     echo "--notest:       do not run test"
-    echo " -run mode:     choose reconstruction mode (local or farm or no run)"
+    echo " -run:          choose reconstruction mode (local or farm or no run)"
     echo "--wget:         get precompiled release as specified with -branch option"
     exit
 fi
@@ -58,6 +59,8 @@ branch="development"
 run="local"
 # input filename
 inFileStub="sidis"
+# yaml filename
+yamlFile="services.yaml"
 # default scratch
 scratchDir="null"
 # run analysis only
@@ -88,6 +91,9 @@ do
     elif [ "$xx" == "-file" ]
     then
         inFileStub=$opt
+    elif [ "$xx" == "-yaml" ]
+    then
+        yamlFile=$opt
     elif [ "$xx" == "-scratch" ]
     then
         scratchDir=$opt
@@ -254,6 +260,7 @@ then
         echo "set farm.exclusive farm16"         >> cook.clara
         echo ${inFileStub}.hipo                  >  files.list
         echo "set fileList $PWD/files.list"      >> cook.clara
+        echo "set servicesFile "${CLARA_HOME}"/plugins/clas12/config/"${yamlFile}      >> cook.clara
 #        echo "set maxEvents 2000" >> cook.clara
         echo "run $run"                          >> cook.clara
         echo "exit"                              >> cook.clara
