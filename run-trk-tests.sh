@@ -117,11 +117,7 @@ case $inFileStub in
     # sidis:
     sidis)
         ;;
-    sidis_tm1_sm1)
-        ;;
-    sidis_tp1_sm1)
-        ;;
-    rga-50nA)
+    sidis_extendedtarget)
         ;;
     clas_002391.0)
         ;;
@@ -144,6 +140,8 @@ case $inFileStub in
     clas_004013.0)
         ;;
     clas_004013.0.9)
+        ;;
+    clas_005038.1231)
         ;;
     clas_004150.0)
         ;;
@@ -240,7 +238,7 @@ then
             wget --no-check-certificate https://claraweb.jlab.org/clara/_downloads/install-claracre-clas.sh
             chmod +x install-claracre-clas.sh
             cp -p $coatDir/coatjava-$branch.tar.gz .
-            ./install-claracre-clas.sh -l $branch -f 4.4 -g 2.1
+            ./install-claracre-clas.sh -l $branch -f 4.3.10 -g 2.1 
             if [ $? != 0 ] ; then echo "clara installation error" ; exit 1 ; fi
             rm install-claracre-clas.sh
         fi
@@ -261,7 +259,8 @@ then
         echo ${inFileStub}.hipo                  >  files.list
         echo "set fileList $PWD/files.list"      >> cook.clara
         echo "set servicesFile "${CLARA_HOME}"/plugins/clas12/config/"${yamlFile}      >> cook.clara
-#        echo "set maxEvents 2000" >> cook.clara
+#        echo "set maxEvents 20000" >> cook.clara
+#        echo "set outputFilePrefix dst"          >> cook.clara
         echo "run $run"                          >> cook.clara
         echo "exit"                              >> cook.clara
         $CLARA_HOME/bin/clara-shell cook.clara
